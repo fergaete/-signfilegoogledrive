@@ -1,0 +1,28 @@
+AppBundle\Entity\Configuracion:
+  type: entity
+  table: configuracion
+  uniqueConstraints: 
+    usuario_configuracion:
+      columns: [id_usuario, nombre]
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    nombre:   {type: string}
+    mimeType: {type: string}
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at
+      nullable: true
+  manyToOne:
+    usuario:
+      targetEntity: AppBundle\Entity\Usuario
+      inversedBy: configuraciones
+      joinColumn:
+        name: id_usuario
+        referencedColumnName: id
+        nullable: false

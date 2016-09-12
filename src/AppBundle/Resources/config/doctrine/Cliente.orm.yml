@@ -1,0 +1,25 @@
+AppBundle\Entity\Cliente:
+  type: entity
+  table: cliente
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    nombre:
+      type: string
+      length: 255
+      unique: true
+    wsdl:
+      type: text
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at
+      nullable: true
+  oneToMany:
+    usuarios:
+      targetEntity: AppBundle\Entity\Usuario
+      mappedBy: cliente

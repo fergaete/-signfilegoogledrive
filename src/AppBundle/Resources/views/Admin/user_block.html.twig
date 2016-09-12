@@ -1,0 +1,12 @@
+{% block user_block %}
+    {% if app.user %}
+        <li class="user-header" style="height:65px;">
+            <p>Bienvenido: {{ app.user }}</p>
+        </li>
+        <li class="user-footer">
+            <div role="presentation">
+                <a href="{{ path('admin_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Cerrar Sesión</a>
+            </div>
+        </li>
+    {% endif %}
+{% endblock %}

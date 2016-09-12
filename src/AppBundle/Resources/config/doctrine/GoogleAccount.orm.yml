@@ -1,0 +1,20 @@
+AppBundle\Entity\GoogleAccount:
+  type: entity
+  table: google_account
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    userId:
+      column: user_id
+      type: text
+    credential:
+      type: text
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at
+      nullable: true

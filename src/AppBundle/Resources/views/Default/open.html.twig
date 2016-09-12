@@ -1,0 +1,56 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block title %}Firmar Documento{% endblock %}
+{% block navbar %}{% render controller("AppBundle:Components:navbar") %}{% endblock %}
+{% block body %}	
+	<div class="page-header"></div>
+    <div class="container-fluid">
+	    <div class="row">
+	    	<div class="col-md-9">
+	      		<div class="embed-responsive embed-responsive-4by3">
+					<iframe src="//docs.google.com/gview?url={{ file.webContentLink }}&embedded=true" id="visualizador"></iframe>
+				</div>
+			</div>
+		    <div class="col-md-3 col-sm-3 sidebar sidebar-right">
+		    	<legend class="legend-sidebar-firmar margen-superior">Información General</legend>
+		        <dl class="dl-horizontal">
+		        	<dt>Nombre</dt>
+		        	<dd>{{ file.originalFilename }}</dd>
+		        	<dt>Tipo</dt>
+		          	<dd> <img src="{{ file.iconLink }}" /> {{ file.mimeType }}</dd>
+		        	<dt>Tamaño</dt>
+		          	<dd>{{ file.quotaBytesUsed | getFormatBytes }}</dd>
+		          	<dt>Modificado</dt>
+		          	<dd>{{ file.modifiedDate | date('Y-m-d H:i:s') }}</dd>
+		          	<dt>Creado</dt>
+		          	<dd>{{ file.createdDate | date('Y-m-d H:i:s') }}</dd>
+					<dt>Abierto por mí</dt>
+		          	<dd>{{ file.lastViewedByMeDate | date('Y-m-d H:i:s') }}</dd>
+		          	{% if firmante %}
+		          		<dt>Firmado Por</dt>
+		          		<dd> {{ firmante.value }}</dd>
+		          	{% endif %}
+		        </dl>
+		        <legend class="legend-sidebar-firmar">Firmar Documento</legend>
+		        <div class="form-inline">
+				  	<div class="form-group">
+				      	<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+				  	</div>
+		        	<button class="btn btn-custom btn-responsive" onclick="firmar('{{ path('firmar') }}', '{{ file.id }}', '{{ transaccionId }}');">Firmar</button>
+				</div>
+		    </div>
+	    </div>
+    </div>
+    <script>
+		function firmar(url, fileId, transaccionId) {
+			var password = $('#password');
+			firmarDocumento(url, password, fileId, transaccionId);
+		}
+    	
+    	$(document).ready(function() {
+			$('body').addClass('firmar-body');
+			$('#visualizador').load(function(){
+				normalizarPermisos('{{ path('normalizar-permisos') }}', '{{ file.id }}', '{{ transaccionId }}');
+			});
+    	});
+    </script>
+{% endblock %}

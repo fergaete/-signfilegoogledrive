@@ -1,0 +1,6 @@
+<a href="{{ admin.generateObjectUrl('log', object) }}" class="btn btn-sm btn-default view_link" title="Historial">
+	<i class="fa fa-clock-o"></i>
+	{% if admin.list._action.options.actions.log.label is defined %}
+		{{ admin.list._action.options.actions.log.label }}
+	{% endif %}
+</a>

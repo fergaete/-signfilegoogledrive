@@ -1,0 +1,53 @@
+AppBundle\Entity\Usuario:
+  type: entity
+  table: usuario
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    email:
+      type: string
+      length: 255
+      unique: true
+    username:
+      type: string
+      length: 255
+    password:
+      type: string
+      length: 255
+      nullable: true
+    isAdmin:
+      column: is_admin
+      type: boolean
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at
+      nullable: true
+  oneToOne:
+    googleAccount:
+      targetEntity: AppBundle\Entity\GoogleAccount
+      joinColumn:
+        name: id_google_account
+        referencedColumnName: id
+      cascade: [persist]
+  manyToOne:
+    cliente:
+      targetEntity: AppBundle\Entity\Cliente
+      inversedBy: usuarios
+      joinColumn:
+        name: id_cliente
+        referencedColumnName: id
+  oneToMany:
+    configuraciones:
+      targetEntity: AppBundle\Entity\Configuracion
+      mappedBy: usuario
+    logs:
+      targetEntity: AppBundle\Entity\UsuarioLog
+      mappedBy: usuario
+    transacciones:
+      targetEntity: AppBundle\Entity\Transaccion
+      mappedBy: usuario

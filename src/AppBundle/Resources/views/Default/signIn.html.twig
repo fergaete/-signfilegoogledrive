@@ -1,0 +1,37 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block title %}Ingresar{% endblock %}
+{% block navbar %}{% render controller("AppBundle:Components:navbar") %}{% endblock %}
+{% block body %}
+	<div class="section-landing">
+		<div class="container" id="intro-wrap">
+			<div class="page-header"></div>
+			<br />
+			{% render controller("AppBundle:Components:flags") %}
+			<div class="row" id="intro">
+			  <h3 class="section-title-white">Bienvenido a DriveSigner.cl, aplicación de firma digital 100% online.</h3>
+			</div>
+			<div class="row" id="products">
+				<div class="col-md-offset-3 col-md-6" id="product5">
+					<div class="pop-up">
+						<div class="img-wrap" id="link-wrap"></div>
+						<div class="caption">
+							<div class="upper-box">
+								<div class="text-wrap">
+									<h3>Usar DriveSigner con Google Drive</h3>
+									<span class="bajada blue">Sus documentos con firma electrónica avanzada, válidos legalmente.</span>
+								</div>
+							</div>
+							<h4>Documentos Soportados:</h4>
+							<div id="center-text3">
+								<span class="glyphicon glyphicon-ok blue smaller"></span> Documentos en formato PDF.<br>
+                                <span class="glyphicon glyphicon-ok blue smaller"></span> Documentos en formato XML.<br>                                
+								<!--<span class="glyphicon glyphicon-ok blue smaller"></span> Documentos en formato de Microsoft Office Word.<br>-->
+							</div>
+						</div>
+					<a href="{{authorization_url}}" class="btn btn-mobile-compra" role="button">Ingresar <span class="glyphicon glyphicon-chevron-right"></span></a>
+					</div>              
+				</div>
+			</div>
+		</div>
+    </div>   
+{% endblock %}

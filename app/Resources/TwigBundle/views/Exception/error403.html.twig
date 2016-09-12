@@ -1,0 +1,29 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block title %}Error 403{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('bundles/app/css/error.css') }}" type="text/css">
+{% endblock %}
+{% block navbar %}{% render controller("AppBundle:Components:navbar") %}{% endblock %}
+{% block body %}
+<div class="page-header"></div>
+    <div class="container-fluid error-background">
+	    <div class="row">
+			<div class="error-container">
+				<h1>Oops!</h1>
+				<h2>403 Acceso Denegado</h2>				
+				<div class="error-details">
+					Usted esta tratando de acceder a un recurso y no tiene los permisos suficientes.					
+				</div>
+				<div class="error-actions">
+					<a href="{{path("homepage")}}" class="btn btn-custom btn-lg">
+						<i class="icon-chevron-left"></i>
+						&nbsp;
+						Volver al Inicio
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

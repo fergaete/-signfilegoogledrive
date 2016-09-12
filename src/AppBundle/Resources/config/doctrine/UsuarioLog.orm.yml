@@ -1,0 +1,19 @@
+AppBundle\Entity\UsuarioLog:
+  type: entity
+  table: usuario_log
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    message: {type: text, nullable: true}
+    level: {type: string, nullable: true}
+    createdAt: {type: datetime, column: created_at}
+    updatedAt: {type: datetime, column: updated_at, nullable: true}
+  manyToOne:
+    usuario:
+      targetEntity: AppBundle\Entity\Usuario
+      inversedBy: logs
+      joinColumn:
+        name: id_usuario
+        referencedColumnName: id

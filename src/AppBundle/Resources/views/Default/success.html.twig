@@ -1,0 +1,29 @@
+{% extends "AppBundle::base.html.twig" %}
+{% block title %}Autenticación Exitosa{% endblock %}
+{% block navbar %}{% render controller("AppBundle:Components:navbar") %}{% endblock %}
+{% block body %}
+	<div class="section-landing">
+		<div class="container" id="intro-wrap">
+			<div class="page-header"></div>
+			<div class="row" id="intro">
+			  <h3 class="section-title-white">Bienvenido a drivesigner.cl, aplicación de firma digital 100% online.</h3>
+			</div>
+			<div class="row" id="products">
+				<div class="col-md-offset-3 col-md-6" id="product5">
+					<div class="pop-up">
+						<div class="img-wrap" id="store-wrap"></div>
+						<div class="caption">
+							<div class="upper-box">
+								<div class="text-wrap">
+									<h3>Autenticación Exitosa!</h3>
+									<span class="bajada blue">Ahora usted puede empezar a firmar documentos a través de DriveSigner.cl</span>
+								</div>
+							</div>
+						</div>
+					<a href="http://drive.google.com" class="btn btn-mobile-compra" role="button">Ir a Google Drive <span class="glyphicon glyphicon-chevron-right"></span></a>
+					</div>              
+				</div>
+			</div>
+		</div>
+    </div>   
+{% endblock %}

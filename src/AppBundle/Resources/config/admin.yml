@@ -1,0 +1,41 @@
+services:
+    admin.usuario:
+        class: AppBundle\Admin\UsuarioAdmin
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: "Usuarios"
+              label: "Usuarios"
+              label_translator_strategy: "sonata.admin.label.strategy.native"
+              route_builder: "sonata.admin.route.path_info"
+        arguments: [~, AppBundle\Entity\Usuario, AppBundle:CRUD]
+    admin.configuracion:
+        class: AppBundle\Admin\ConfiguracionAdmin
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: "Configuraciones"
+              label: "Configuraciones"
+              label_translator_strategy: "sonata.admin.label.strategy.native"
+              route_builder: "sonata.admin.route.path_info"
+        arguments: [~, AppBundle\Entity\Configuracion, ~]
+    admin.cliente:
+        class: AppBundle\Admin\ClienteAdmin
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: "Clientes"
+              label: "Clientes"
+              label_translator_strategy: "sonata.admin.label.strategy.native"
+              route_builder: "sonata.admin.route.path_info"
+        arguments: [~, AppBundle\Entity\Cliente, ~]
+    admin.usuario_log:
+        class: AppBundle\Admin\UsuarioLogAdmin
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: "Usuarios"
+              label: "Historial"
+              label_translator_strategy: "sonata.admin.label.strategy.native"
+              route_builder: "sonata.admin.route.path_info"
+        arguments: [~, AppBundle\Entity\UsuarioLog, ~]

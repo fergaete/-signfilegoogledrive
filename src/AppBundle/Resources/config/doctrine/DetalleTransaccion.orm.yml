@@ -1,0 +1,31 @@
+AppBundle\Entity\DetalleTransaccion:
+  type: entity
+  table: detalle_transaccion
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    estado: {type: integer}
+    mensaje: {type: text}
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at
+      nullable: true
+  manyToOne:
+    transaccion:
+      targetEntity: AppBundle\Entity\Transaccion
+      inversedBy: detalles
+      joinColumn:
+        name: id_transaccion
+        referencedColumnName: id
+        nullable: false
+    archivo:
+      targetEntity: AppBundle\Entity\Archivo
+      inversedBy: detalleTransacciones
+      joinColumn:
+        name: id_archivo
+        referencedColumnName: id

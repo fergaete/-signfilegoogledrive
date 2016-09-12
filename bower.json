@@ -1,0 +1,25 @@
+{
+  "name": "fgaete",
+  "homepage": "https://github.com/pepin82/gdesigner",
+  "authors": [
+    "Fernando Javier Gaete Gomez <fergaete@live.cl>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/AppBundle/Resources/public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "fontawesome": "4.5.0",
+    "bootbox": "4.4.0",
+    "animate.css": "3.5.0"
+  }
+}

@@ -1,0 +1,27 @@
+AppBundle\Entity\Archivo:
+  type: entity
+  table: archivo
+  indexes:
+    googleFileId_index:
+      columns: [ google_file_id ]
+  id:
+    id:
+      type: integer
+      generator: {strategy: AUTO}
+  fields:
+    googleFileId: {type: string, unique: true}
+    nombre:   {type: string}
+    mimeType: {type: string}
+    tipo: {type: integer}
+    esPublico: {type: boolean}
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at
+      nullable: true
+  oneToMany:
+    detalleTransacciones:
+      targetEntity: AppBundle\Entity\DetalleTransaccion
+      mappedBy: archivo

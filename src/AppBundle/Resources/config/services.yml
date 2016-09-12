@@ -1,0 +1,95 @@
+services:
+    app.twig_extension:
+        class: AppBundle\Twig\FileExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.event_listener.time_stampable_subscriber:
+        class: AppBundle\EventListener\TimestampableSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    # repositories
+    app.repository.usuario:
+        class: AppBundle\Repository\Doctrine\UsuarioRepository
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.repository.google_account:
+        class: AppBundle\Repository\Doctrine\GoogleAccountRepository
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.repository.archivo:
+        class: AppBundle\Repository\Doctrine\ArchivoRepository
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.repository.configuracion:
+        class: AppBundle\Repository\Doctrine\ConfiguracionRepository
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.repository.transaccion:
+        class: AppBundle\Repository\Doctrine\TransaccionRepository
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    #esigner
+    #app.service.esign.esigner.client:
+    #    class: AppBundle\Service\Esign\Esigner\Client\SoapClient
+    #    arguments: ["%esigner_wsdl%"]
+
+    #app.service.esign.esigner:
+    #    class: AppBundle\Service\Esign\Esigner\Esigner
+    #    arguments: ["@app.service.esign.esigner.client"]
+
+    # google drive
+    app.factory.google.client_factory:
+        class:   \GoogleClient
+        factory: [AppBundle\Factory\Google\ClientFactory, getInstance]
+        arguments: ["%google_client_id%", "%google_client_secret%", "%google_redirect_url%"]
+
+    app.factory.google.oauth2_factory:
+        class:   \Google_Service_Oauth2
+        factory: [AppBundle\Factory\Google\OAuth2Factory, getInstance]
+        arguments: ["@app.factory.google.client_factory"]
+
+    app.factory.google.drive_factory:
+        class:   \Google_Service_Drive
+        factory: [AppBundle\Factory\Google\DriveFactory, getInstance]
+        arguments: ["@app.factory.google.client_factory"]
+
+    app.service.google.credential:
+        class: AppBundle\Service\Google\Credential\DoctrineOrmImplementation
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.service.google.authorization:
+        class: AppBundle\Service\Google\Authorization
+        arguments: ["@app.factory.google.client_factory"]
+
+    app.service.google.user_service:
+        class: AppBundle\Service\Google\UserService
+        arguments: ["@app.factory.google.oauth2_factory"]
+
+    app.service.google.drive_service:
+        class: AppBundle\Service\Google\Drive\DriveService
+        arguments: ["@app.factory.google.drive_factory"]
+
+    app.service.google.drive.property_service:
+        class: AppBundle\Service\Google\Drive\PropertyService
+        arguments: ["@app.factory.google.drive_factory"]
+
+    app.service.oauth.user_provider:
+       class: AppBundle\Service\OAuth\UserProvider
+       arguments: ["@app.repository.usuario", "@doctrine.orm.entity_manager"]
+
+    #monolog
+    logger_database:
+        class: AppBundle\Service\Log\Handler\DatabaseHandler
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    monolog.processor.request:
+        class: AppBundle\Service\Log\Processor\RequestProcessor
+        arguments:  [ "@security.token_storage" ]
+        tags:
+            - { name: monolog.processor, method: processRecord }
+            - { name: monolog.logger, channel: usuario }
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

@@ -1,0 +1,35 @@
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top affix-top">
+  <div class="container navbar-container">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" rel="home" href="#" title="E-Sign">
+			<img style="max-width:101px; margin-top: -14px;" src="{{ asset('bundles/app/img/logo.png') }}">
+		</a>
+		<!--<a class="navbar-brand" href="javascript:void(0)">GDESIGNER</a>-->
+	</div>	
+	<div id="navbar" class="collapse navbar-collapse">
+	  
+	  <!-- USER INFO -->
+		{% if user %}
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown user-profile">
+				<img class="navbar-user-photo img-circle" src="{{ user.picture }}" width="50" height="50">			
+				<p class="navbar-text" style="margin:10px 5px;">
+					<span class="pull-right" style="color:333;">{{ user.givenName }} {{ user.familyName }}</span>
+					<br />
+					<a class="small-text-nav pull-right" href="{{path('logout')}}">[ Cerrar Sesión ]</a>
+				</p>
+			</li>
+		</ul>
+		{% endif %}	  
+	  <!-- END USER INFO -->
+	  
+	</div><!--/.nav-collapse -->
+  </div>
+</nav>
